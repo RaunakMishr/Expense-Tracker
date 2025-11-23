@@ -3,7 +3,7 @@ const ExpenseSchema = require("../models/ExpenseModel")
 
 exports.addExpense = async (req, res) => {
     const {title, amount, category, description, date}  = req.body
-
+    //it creates a new instance
     const income = ExpenseSchema({
         title,
         amount,
@@ -17,7 +17,7 @@ exports.addExpense = async (req, res) => {
         if(!title || !category || !description || !date){
             return res.status(400).json({message: 'All fields are required!'})
         }
-        if(amount <= 0 || !amount === 'number'){
+        if(amount <= 0 || typeof amount !== 'number'){
             return res.status(400).json({message: 'Amount must be a positive number!'})
         }
         await income.save()
